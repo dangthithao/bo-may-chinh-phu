@@ -2,7 +2,7 @@ import infoData from "../../../public/data.json";
 interface InfoProps{
   nhomCondition:String
 }
-const Info: React.FC<InfoProps> = ({ nhomCondition}) => {
+const Info= ({ nhomCondition} :InfoProps) => {
   return (
     <div>
       {infoData.length > 0 && (  
