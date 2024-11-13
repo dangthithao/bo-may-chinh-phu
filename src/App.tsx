@@ -1,25 +1,30 @@
+import { useEffect, useState } from "react";
 import Info from "./components/info/info";
+interface NhomItem {
+  nhom: string;
+}
 function App() {
-    const nhomCondition= "Thủ tướng Chính phủ"
-    const nhomCondition1= "Phó thủ tướng chính phủ"
-    const nhomCondition2= "Bộ trưởng, Trưởng ngành"
+  const [nhomConditions, setNhomConditions] = useState<string[]>([]);
+  // lấy dữ liệu từ data.json
+  useEffect(() => {
+    fetch("/data.json")//đường dẫn lấy dữ liệu data.json
+      .then((response) => response.json())//chuyển đổi dữu liệu
+      .then((data: NhomItem[]) => {
+        const nhomList = Array.from(new Set(data.map((item) => item.nhom)));
+        setNhomConditions(nhomList);
+      })
+  }, []);
+
   return (
     <>
       <div className="home">
         <div className="container">
-          <h2 className="text-center text-uppercase my-4">
-            Bộ máy Chính phủ sau khi được kiện toàn
-          </h2>
           <div className="row">
-            <div className="col-md-12">
-              <Info nhomCondition={nhomCondition}/>
-            </div>
-            <div className="col-md-12">
-              <Info nhomCondition={nhomCondition1}/>
-            </div>
-            <div className="col-md-12">
-              <Info nhomCondition={nhomCondition2}/>
-            </div>
+            {nhomConditions.map((condition, index) => (
+              <div key={index} className="col-md-12">
+                <Info nhomCondition={condition} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
