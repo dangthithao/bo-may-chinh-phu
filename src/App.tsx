@@ -5,14 +5,16 @@ interface NhomItem {
 }
 function App() {
   const [nhomConditions, setNhomConditions] = useState<string[]>([]);
+ 
   // lấy dữ liệu từ data.json
   useEffect(() => {
-    fetch("/data.json")//đường dẫn lấy dữ liệu data.json
-      .then((response) => response.json())//chuyển đổi dữu liệu
+    const datalink = `/data.json`;
+    fetch(datalink) //đường dẫn lấy dữ liệu data.json
+      .then((response) => response.json()) //chuyển đổi dữu liệu
       .then((data: NhomItem[]) => {
         const nhomList = Array.from(new Set(data.map((item) => item.nhom)));
         setNhomConditions(nhomList);
-      })
+      });
   }, []);
 
   return (
