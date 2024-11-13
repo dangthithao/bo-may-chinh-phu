@@ -24,7 +24,7 @@ const Info= ({ nhomCondition} :InfoProps) => {
                   style={{ maxWidth: "100%", height: "auto" }}
                 />
               </div>
-              <div className="col-7 col-md-8 col-sm-7">
+              <div className="col-7">
                 <p className="text-top">{item.hoVaTen}</p>
                 <p>
                   <span>Ngày sinh: </span>
