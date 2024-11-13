@@ -5,10 +5,14 @@ interface NhomItem {
 }
 function App() {
   const [nhomConditions, setNhomConditions] = useState<string[]>([]);
- 
+  const dataUrl = document.getElementById("root")?.getAttribute("data-json");
   // lấy dữ liệu từ data.json
+  let datalink:string;
   useEffect(() => {
-    const datalink = `/data.json`;
+    if (dataUrl) {
+      datalink = `${dataUrl}`; // Nếu có dataUrl
+    }
+    console.log("Datalink:", datalink);
     fetch(datalink) //đường dẫn lấy dữ liệu data.json
       .then((response) => response.json()) //chuyển đổi dữu liệu
       .then((data: NhomItem[]) => {
@@ -35,3 +39,4 @@ function App() {
 }
 
 export default App;
+
